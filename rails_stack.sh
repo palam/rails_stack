@@ -14,7 +14,7 @@ distro_sig=$(cat /etc/issue)
 admin_user_name="admin"
 user_home="/home/$admin_user_name"
 repository_url="https://github.com/palam/rails_stack"
-templates_url="https://github.com/palam/rails_stack/raw/master/templates"
+templates_url="https://raw.github.com/palam/rails_stack/master/templates"
 ssh_port="30000"
 
 
@@ -86,9 +86,11 @@ echo "=> 4. Some other minor performance and security enhancements."
 echo "!!! NOTE: This script will set up public key authentication, but will not disable password authentication - just something to keep in mind !!!"
 echo -e "=> Replacing default SSHD config with template from $templates_url/sshd_config..."
 echo "Backed up old sshd_config to sshd_config.old"
-wget --no-check-certificate /etc/ssh/sshd_config -O $templates_url/sshd_config
-sed s/SSH_PORT/$ssh_port/ </etc/ssh/sshd_config >/etc/ssh/sshd_config
-sed s/ADMIN_USER_NAME/$admin_user_name/ </etc/ssh/sshd_config >/etc/ssh/sshd_config
+wget --no-check-certificate $templates_url/sshd_config -O /etc/ssh/sshd_config
+sed s/SSH_PORT/$ssh_port/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
+cp /etc/ssh/sshd_config_t /etc/ssh/sshd_config
+sed s/ADMIN_USER_NAME/$admin_user_name/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
+cp /etc/ssh/sshd_config_t /etc/ssh/sshd_config
 echo "==> done."
 
 echo "Adding IP Tables ruleset for a Rails web server. Summary of changes:"
@@ -100,8 +102,9 @@ echo -e "=> Adding configuration for IP Tables from $templates_url/iptables.up.r
 echo "Flush existing rules..."
 /sbin/iptables -F
 echo "Placing rules file in /etc"
-wget --no-check-certificate /etc/iptables.up.rules -O $templates_url/iptables.up.rules
-sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules
+wget --no-check-certificate $templates_url/iptables.up.rules -O /etc/iptables.up.rules
+sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules_t
+cp /etc/iptables.up.rules_t /etc/iptables.up.rules
 echo "Adding network interface boot script to load rules into iptables"
 echo -e '#!/bin/sh
     /sbin/iptables-restore < /etc/iptables.up.rules' > /etc/network/if-pre-up.d/iptables
