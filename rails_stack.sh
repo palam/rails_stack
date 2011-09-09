@@ -86,7 +86,7 @@ echo "=> 4. Some other minor performance and security enhancements."
 echo "!!! NOTE: This script will set up public key authentication, but will not disable password authentication - just something to keep in mind !!!"
 echo -e "=> Replacing default SSHD config with template from $templates_url/sshd_config..."
 echo "Backed up old sshd_config to sshd_config.old"
-wget --no-check-certificate /etc/ssh/sshd_config $templates_url/ssh_config
+wget --no-check-certificate /etc/ssh/sshd_config -O $templates_url/sshd_config
 sed s/SSH_PORT/$ssh_port/ </etc/ssh/sshd_config >/etc/ssh/sshd_config
 sed s/ADMIN_USER_NAME/$admin_user_name/ </etc/ssh/sshd_config >/etc/ssh/sshd_config
 echo "==> done."
@@ -100,7 +100,7 @@ echo -e "=> Adding configuration for IP Tables from $templates_url/iptables.up.r
 echo "Flush existing rules..."
 /sbin/iptables -F
 echo "Placing rules file in /etc"
-wget --no-check-certificate /etc/iptables.up.rules $templates_url/iptables.up.rules
+wget --no-check-certificate /etc/iptables.up.rules -O $templates_url/iptables.up.rules
 sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules
 echo "Adding network interface boot script to load rules into iptables"
 echo -e '#!/bin/sh
