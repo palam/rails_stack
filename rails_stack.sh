@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Rails Stack based on Rails Ready and Rails Ready Ready; Work in progress.
+# Work in progress based on Rails Ready (https://github.com/joshfng/railsready) and Rails Ready Ready (https://github.com/3months/railsready-ready)
 #
 
 shopt -s nocaseglob
@@ -110,7 +110,7 @@ echo -e "=> Adding configuration for IP Tables from $templates_url/iptables.up.r
 echo "Flush existing rules..."
 /sbin/iptables -F
 echo "Placing rules file in /etc"
-wget --no-check-certificate -0 /etc/iptables.up.rules $templates_url/iptables.up.ruels
+wget --no-check-certificate -0 /etc/iptables.up.rules $templates_url/iptables.up.rules
 sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules
 echo "Adding network interface boot script to load rules into iptables"
 echo -e '#!/bin/sh
