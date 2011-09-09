@@ -59,20 +59,10 @@ echo "==> done."
 echo "Installing sudo..."
 aptitude -y install sudo
 echo "==> done."
-echo "Creating goup wheel..."
-groupadd wheel
-echo "==> done."
-echo "Adding wheel to sudoers..."
-cp /etc/sudoers /etc/sudoers.tmp
-chmod 0640 /etc/sudoers.tmp
-echo "%wheel ALL = (ALL) ALL" >> /etc/sudoers.tmp
-chmod 0440 /etc/sudoers.tmp
-mv /etc/sudoers.tmp /etc/sudoers
-echo "==> done."
 echo -e "Adding admin user $admin_user_name"
 echo "Enter admin password: "
 read admin_password
-useradd -m -s /bin/bash -G wheel "$admin_user_name" --create-home
+useradd $admin_user_name -G admin --create-home
 echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
 
