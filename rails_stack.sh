@@ -62,7 +62,7 @@ echo "==> done."
 echo -e "Adding admin user $admin_user_name"
 echo "Enter admin password: "
 read admin_password
-useradd $admin_user_name -G admin --create-home
+useradd $admin_user_name -g admin --create-home
 echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
 
