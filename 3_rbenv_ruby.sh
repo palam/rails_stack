@@ -12,7 +12,7 @@ script_runner=$(whoami)
 railsready_path=$(cd && pwd)/railsready
 log_file="$railsready_path/install.log"
 distro_sig=$(cat /etc/issue)
-rbenv_path=$(cd && pwd)/.rbenv/versions/
+rbenv_path=$(cd && pwd)/.rbenv/versions
 
 # Install git-core
 echo -e "\n=> Installing git..."
@@ -22,11 +22,14 @@ echo "==> done..."
 echo -e "\n=> Installing rbenv..."
 git clone git://github.com/sstephenson/rbenv.git .rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bash_profile
-exec
+echo "==> done..."
+echo -e "\n=> Reloading shell so rbenv is available..."
+source $HOME/.bashrc
+source $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Downloading Ruby $ruby_version_string \n"
-cd $rbenv_path && wget $ruby_source_url
+mkdir $rbenv_path && cd $rbenv_path && wget $ruby_source_url
 echo -e "\n==> done..."
 echo -e "\n=> Extracting Ruby $ruby_version_string"
 tar -xzf $ruby_source_tar_name >> $log_file 2>&1
