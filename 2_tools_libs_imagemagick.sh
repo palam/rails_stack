@@ -6,6 +6,10 @@ set -e
 railsready_path=$(cd && pwd)/railsready
 log_file="$railsready_path/install.log"
 
+echo -e "\n=> Creating log file..."
+cd && mkdir -p railsready && touch install.log
+echo "==> done."
+
 echo -e "\n=> Installing build tools..."
 sudo aptitude -y install \
     wget curl build-essential clang \

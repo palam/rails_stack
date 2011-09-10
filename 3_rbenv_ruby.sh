@@ -35,8 +35,8 @@ echo "==> done..."
 echo -e "\n=> Installing Ruby $ruby_version_string"
 cd $ruby_version_string
 ./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string
-make
-make install
+make >> $log_file 2>&1
+make install >> $log_file 2>&1
 rbenv rehash
 echo "==> done..."
 
