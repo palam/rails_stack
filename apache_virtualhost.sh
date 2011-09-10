@@ -19,14 +19,14 @@ function apache_virtualhost {
 		return;
 	fi
 
-	mkdir -p /home/$2/sites/$1/public /home/$2/public_html/$1/logs
+	mkdir -p /home/$2/sites/$1/public /home/$2/sites/$1/logs
 
-	echo "<VirtualHost *:80>" > /etc/apache2/sites-available/$1
-	echo "    ServerName $1" >> /etc/apache2/sites-available/$1
-	echo "    DocumentRoot /home/$2/sites/$1/public/" >> /etc/apache2/sites-available/$1
-	echo "    ErrorLog /home/$2/sites/$1/logs/error.log" >> /etc/apache2/sites-available/$1
-    echo "    CustomLog /home/$2/sites/$1/logs/access.log combined" >> /etc/apache2/sites-available/$1
-	echo "</VirtualHost>" >> /etc/apache2/sites-available/$1
+	sudo echo "<VirtualHost *:80>" > /etc/apache2/sites-available/$1
+	sudo echo "    ServerName $1" >> /etc/apache2/sites-available/$1
+	sudo echo "    DocumentRoot /home/$2/sites/$1/public/" >> /etc/apache2/sites-available/$1
+	sudo echo "    ErrorLog /home/$2/sites/$1/logs/error.log" >> /etc/apache2/sites-available/$1
+    sudo echo "    CustomLog /home/$2/sites/$1/logs/access.log combined" >> /etc/apache2/sites-available/$1
+	sudo echo "</VirtualHost>" >> /etc/apache2/sites-available/$1
 
 	sudo a2ensite $1
 
