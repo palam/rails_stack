@@ -50,6 +50,11 @@ echo " * An $admin_user_name user that is permitted to sudo"
 echo " * A secure SSH configuration preconfigured to prefer public key authenitcation"
 echo " * A webserver-oriented IP Tables configuration allowing web and SSH traffic only"
 
+echo -e "\n=> Creating log file..."
+cd && mkdir -p railsready && touch install.log
+cd
+echo "==> done."
+
 echo "Enter time zone (ex: UTC): "
 read time_zone
 echo "Enter admin username: "
