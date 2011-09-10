@@ -25,7 +25,6 @@ echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bashrc
 echo "==> done..."
 echo -e "\n=> Reloading shell so rbenv is available..."
 source $HOME/.bashrc
-source $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Downloading Ruby $ruby_version_string \n"
@@ -50,7 +49,6 @@ rbenv global $ruby_version_string
 
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
 source $HOME/.bashrc
-source $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Updating Rubygems..."
