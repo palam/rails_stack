@@ -21,7 +21,7 @@ echo "==> done..."
 
 echo -e "\n=> Installing rbenv..."
 git clone git://github.com/sstephenson/rbenv.git .rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bash_profile
+echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bashrc
 echo "==> done..."
 echo -e "\n=> Reloading shell so rbenv is available..."
 source $HOME/.bashrc
@@ -36,8 +36,11 @@ tar -xzf $ruby_source_tar_name >> $log_file 2>&1
 echo "==> done..."
 echo -e "\n=> Installing Ruby $ruby_version_string"
 cd $ruby_source_dir_name
-./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string
+echo "configure..."
+./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string >> $log_file 2>&1
+echo "make..."
 make >> $log_file 2>&1
+echo "make install..."
 make install >> $log_file 2>&1
 rbenv rehash
 echo "==> done..."
