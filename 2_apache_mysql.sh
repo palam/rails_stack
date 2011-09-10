@@ -10,7 +10,7 @@ function mysql_install {
 
 	echo "mysql-server-5.1 mysql-server/root_password password $1" | debconf-set-selections
 	echo "mysql-server-5.1 mysql-server/root_password_again password $1" | debconf-set-selections
-	sudo apt-get -y install mysql-server mysql-client
+	apt-get -y install mysql-server mysql-client
 
 	echo "Sleeping while MySQL starts up for the first time..."
 	sleep 5
@@ -55,9 +55,9 @@ function mysql_tune {
 
 function apache_install {
 	# installs the system default apache2 MPM
-	sudo aptitude -y install apache2
+	aptitude -y install apache2
 
-	sudo a2dissite default # disable the interfering default virtualhost
+	a2dissite default # disable the interfering default virtualhost
 
 	# clean up, or add the NameVirtualHost line to ports.conf
 	sed -i -e 's/^NameVirtualHost \*$/NameVirtualHost *:80/' /etc/apache2/ports.conf

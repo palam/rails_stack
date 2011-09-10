@@ -12,43 +12,11 @@ script_runner=$(whoami)
 railsready_path=$(cd && pwd)/railsready
 log_file="$railsready_path/install.log"
 distro_sig=$(cat /etc/issue)
-rbenv_path=$(cd && pwd)/.rbenv/versions
 
 # Install git-core
 echo -e "\n=> Installing git..."
 sudo aptitude -y install git-core >> $log_file 2>&1
 echo "==> done..."
-
-# echo -e "\n=> Installing rbenv..."
-# git clone git://github.com/sstephenson/rbenv.git .rbenv
-# echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bashrc
-# echo "==> done..."
-# echo -e "\n=> Reloading shell so rbenv is available..."
-# source $HOME/.bashrc
-# echo "==> done..."
-# 
-# echo -e "\n=> Downloading Ruby $ruby_version_string \n"
-# mkdir $rbenv_path && cd $rbenv_path && wget $ruby_source_url
-# echo -e "\n==> done..."
-# echo -e "\n=> Extracting Ruby $ruby_version_string"
-# tar -xzf $ruby_source_tar_name >> $log_file 2>&1
-# echo "==> done..."
-# echo -e "\n=> Installing Ruby $ruby_version_string"
-# cd $ruby_source_dir_name
-# echo "configure..."
-# ./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string >> $log_file 2>&1
-# echo "make..."
-# make >> $log_file 2>&1
-# echo "make install..."
-# make install >> $log_file 2>&1
-# echo "==> done..."
-# 
-# echo -e "\n=> Reloading shell so rbenv is available..."
-# source $HOME/.bashrc
-# echo "==> done..."
-# echo -e "\n=> Making Ruby $ruby_version_string the global default"
-# rbenv rehash
-# rbenv global $ruby_version_string
 
 #thanks wayneeseguin :)
 echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
