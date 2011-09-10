@@ -48,19 +48,11 @@ source $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Updating Rubygems..."
-if [ $whichRuby -eq 1 ] ; then
-  sudo gem update --system --no-ri --no-rdoc >> $log_file 2>&1
-elif [ $whichRuby -eq 2 ] ; then
-  gem update --system --no-ri --no-rdoc >> $log_file 2>&1
-fi
+gem update --system --no-ri --no-rdoc >> $log_file 2>&1
 echo "==> done..."
 
 echo -e "\n=> Installing Bundler, Passenger and Rails..."
-if [ $whichRuby -eq 1 ] ; then
-  sudo gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
-elif [ $whichRuby -eq 2 ] ; then
-  gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
-fi
+gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
 echo "==> done..."
 
 echo -e "\n#################################"

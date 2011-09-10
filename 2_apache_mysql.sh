@@ -97,4 +97,7 @@ echo "==> done..."
 
 echo -e "\n=> Installing Apache..."
 apache_install && apache_tune 40
+apt-get -y install apache2-prefork-dev
+apt-get -y install libapr1-dev
+apt-get -y install libaprutil1-dev
 echo "==> done..."
