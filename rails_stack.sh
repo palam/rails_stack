@@ -104,7 +104,7 @@ echo "Flush existing rules..."
 echo "Placing rules file in /etc"
 wget --no-check-certificate $templates_url/iptables.up.rules -O /etc/iptables.up.rules
 sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules_t
-cp /etc/iptables.up.rules_t /etc/iptables.up.rules
+mv /etc/iptables.up.rules_t /etc/iptables.up.rules
 echo "Adding network interface boot script to load rules into iptables"
 echo -e '#!/bin/sh
     /sbin/iptables-restore < /etc/iptables.up.rules' > /etc/network/if-pre-up.d/iptables
