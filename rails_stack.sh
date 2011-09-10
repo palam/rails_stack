@@ -88,9 +88,9 @@ echo -e "=> Replacing default SSHD config with template from $templates_url/sshd
 echo "Backed up old sshd_config to sshd_config.old"
 wget --no-check-certificate $templates_url/sshd_config -O /etc/ssh/sshd_config
 sed s/SSH_PORT/$ssh_port/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
-cp /etc/ssh/sshd_config_t /etc/ssh/sshd_config
+mv /etc/ssh/sshd_config_t /etc/ssh/sshd_config
 sed s/ADMIN_USER_NAME/$admin_user_name/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
-cp /etc/ssh/sshd_config_t /etc/ssh/sshd_config
+mv /etc/ssh/sshd_config_t /etc/ssh/sshd_config
 echo "==> done."
 
 echo "Adding IP Tables ruleset for a Rails web server. Summary of changes:"
