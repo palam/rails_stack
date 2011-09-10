@@ -41,10 +41,13 @@ echo "make..."
 make >> $log_file 2>&1
 echo "make install..."
 make install >> $log_file 2>&1
-rbenv rehash
 echo "==> done..."
 
+echo -e "\n=> Reloading shell so rbenv is available..."
+source $HOME/.bashrc
+echo "==> done..."
 echo -e "\n=> Making Ruby $ruby_version_string the global default"
+rbenv rehash
 rbenv global $ruby_version_string
 
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
