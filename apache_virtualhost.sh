@@ -28,9 +28,9 @@ function apache_virtualhost {
     echo "    CustomLog /home/$2/sites/$1/logs/access.log combined" >> /etc/apache2/sites-available/$1
 	echo "</VirtualHost>" >> /etc/apache2/sites-available/$1
 
-	a2ensite $1
+	sudo a2ensite $1
 
-	touch /tmp/restart-apache2
+	sudo touch /tmp/restart-apache2
 }
 
 script_runner=$(whoami)
