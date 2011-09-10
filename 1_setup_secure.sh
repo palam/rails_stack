@@ -16,7 +16,7 @@ user_home="/home/$admin_user_name"
 repository_url="https://github.com/palam/rails_stack"
 templates_url="https://raw.github.com/palam/rails_stack/master/templates"
 ssh_port="30000"
-
+time_zone="UTC"
 
 
 control_c()
@@ -50,18 +50,27 @@ echo " * An $admin_user_name user that is permitted to sudo"
 echo " * A secure SSH configuration preconfigured to prefer public key authenitcation"
 echo " * A webserver-oriented IP Tables configuration allowing web and SSH traffic only"
 
+
+echo "Enter time zone (ex: UTC): "
+read time_zone
+echo "Enter admin username: "
+read admin_user_name
+echo "Enter admin password: "
+read admin_password
+
+echo "Setting time zone..."
+ln -sf /usr/share/zoneinfo/$time_zone /etc/localtime
+echo "==> done."
+
 echo -e "\n"
 echo -e "\n=> Creating log file..."
 cd && mkdir -p rails_stack && touch install.log
 echo "==> done."
 
-
 echo "Installing sudo..."
 aptitude -y install sudo
 echo "==> done."
 echo -e "Adding admin user $admin_user_name"
-echo "Enter admin password: "
-read admin_password
 useradd $admin_user_name -g admin --create-home
 echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
@@ -110,4 +119,9 @@ echo -e '#!/bin/sh
     /sbin/iptables-restore < /etc/iptables.up.rules' > /etc/network/if-pre-up.d/iptables
 echo "Making new script executable"
 chmod +x /etc/network/if-pre-up.d/iptables
+echo "==> done."
+
+echo "Updating package lists and packages"
+aptitude update
+aptitude -y safe-upgrade
 echo "==> done."
