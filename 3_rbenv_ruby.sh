@@ -12,7 +12,7 @@ script_runner=$(whoami)
 railsready_path=$(cd && pwd)/railsready
 log_file="$railsready_path/install.log"
 distro_sig=$(cat /etc/issue)
-rbenv_path = $(cd && pwd)/.rbenv/versions/
+rbenv_path=$(cd && pwd)/.rbenv/versions/
 
 # Install git-core
 echo -e "\n=> Installing git..."

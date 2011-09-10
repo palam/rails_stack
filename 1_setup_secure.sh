@@ -67,7 +67,7 @@ cd && mkdir -p rails_stack && touch install.log
 echo "==> done."
 
 echo "Installing sudo..."
-aptitude -y install sudo
+aptitude -y install sudo >> $log_file 2>&1
 echo "==> done."
 echo -e "Adding admin user $admin_user_name"
 useradd $admin_user_name -g admin --create-home
@@ -75,7 +75,7 @@ echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
 
 echo -e "\n=> Installing OpenSSH server, if it isn't already installed..."
-apt-get install openssh-server
+apt-get install openssh-server >> $log_file 2>&1
 echo "==> done."
 
 if [[ -d "$user_home/.ssh" ]] ; then
@@ -94,7 +94,7 @@ echo "=> 4. Some other minor performance and security enhancements."
 echo "!!! NOTE: This script will set up public key authentication, but will not disable password authentication - just something to keep in mind !!!"
 echo -e "=> Replacing default SSHD config with template from $templates_url/sshd_config..."
 echo "Backed up old sshd_config to sshd_config.old"
-wget --no-check-certificate $templates_url/sshd_config -O /etc/ssh/sshd_config
+wget --no-check-certificate $templates_url/sshd_config -O /etc/ssh/sshd_config >> $log_file 2>&1
 sed s/SSH_PORT/$ssh_port/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
 mv /etc/ssh/sshd_config_t /etc/ssh/sshd_config
 sed s/ADMIN_USER_NAME/$admin_user_name/ </etc/ssh/sshd_config >/etc/ssh/sshd_config_t
@@ -110,7 +110,7 @@ echo -e "=> Adding configuration for IP Tables from $templates_url/iptables.up.r
 echo "Flush existing rules..."
 /sbin/iptables -F
 echo "Placing rules file in /etc"
-wget --no-check-certificate $templates_url/iptables.up.rules -O /etc/iptables.up.rules
+wget --no-check-certificate $templates_url/iptables.up.rules -O /etc/iptables.up.rules >> $log_file 2>&1
 sed s/SSH_PORT/$ssh_port/ </etc/iptables.up.rules >/etc/iptables.up.rules_t
 mv /etc/iptables.up.rules_t /etc/iptables.up.rules
 echo "Adding network interface boot script to load rules into iptables"
@@ -121,6 +121,6 @@ chmod +x /etc/network/if-pre-up.d/iptables
 echo "==> done."
 
 echo "Updating package lists and packages"
-aptitude update
-aptitude -y safe-upgrade
+aptitude update >> $log_file 2>&1
+aptitude -y safe-upgrade >> $log_file 2>&1
 echo "==> done."
