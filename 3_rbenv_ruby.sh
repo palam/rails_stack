@@ -76,14 +76,27 @@ echo "==> done..."
 
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
 source $HOME/.bashrc
+source $HOME/.bash_profile
 echo "==> done..."
 
 echo -e "\n=> Updating Rubygems..."
-gem update --system --no-ri --no-rdoc >> $log_file 2>&1
+if [ $whichRuby -eq 1 ] ; then
+  sudo gem update --system --no-ri --no-rdoc >> $log_file 2>&1
+elif [ $whichRuby -eq 2 ] ; then
+  gem update --system --no-ri --no-rdoc >> $log_file 2>&1
+fi
 echo "==> done..."
 
 echo -e "\n=> Installing Bundler, Passenger and Rails..."
-gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
+if [ $whichRuby -eq 1 ] ; then
+  sudo gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
+elif [ $whichRuby -eq 2 ] ; then
+  gem install bundler passenger rails --no-ri --no-rdoc >> $log_file 2>&1
+fi
 echo "==> done..."
+
+echo -e "\n#################################"
+echo    "### Installation is complete! ###"
+echo -e "#################################\n"
 
 echo -e "\n !!! logout and back in to access Ruby !!!\n"
