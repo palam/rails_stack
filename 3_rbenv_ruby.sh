@@ -35,7 +35,7 @@ echo -e "\n=> Extracting Ruby $ruby_version_string"
 tar -xzf $ruby_source_tar_name >> $log_file 2>&1
 echo "==> done..."
 echo -e "\n=> Installing Ruby $ruby_version_string"
-cd $ruby_version_string
+cd $ruby_source_dir_name
 ./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string
 make >> $log_file 2>&1
 make install >> $log_file 2>&1
