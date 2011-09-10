@@ -19,36 +19,60 @@ echo -e "\n=> Installing git..."
 sudo aptitude -y install git-core >> $log_file 2>&1
 echo "==> done..."
 
-echo -e "\n=> Installing rbenv..."
-git clone git://github.com/sstephenson/rbenv.git .rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bashrc
-echo "==> done..."
-echo -e "\n=> Reloading shell so rbenv is available..."
-source $HOME/.bashrc
-echo "==> done..."
+# echo -e "\n=> Installing rbenv..."
+# git clone git://github.com/sstephenson/rbenv.git .rbenv
+# echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> .bashrc
+# echo "==> done..."
+# echo -e "\n=> Reloading shell so rbenv is available..."
+# source $HOME/.bashrc
+# echo "==> done..."
+# 
+# echo -e "\n=> Downloading Ruby $ruby_version_string \n"
+# mkdir $rbenv_path && cd $rbenv_path && wget $ruby_source_url
+# echo -e "\n==> done..."
+# echo -e "\n=> Extracting Ruby $ruby_version_string"
+# tar -xzf $ruby_source_tar_name >> $log_file 2>&1
+# echo "==> done..."
+# echo -e "\n=> Installing Ruby $ruby_version_string"
+# cd $ruby_source_dir_name
+# echo "configure..."
+# ./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string >> $log_file 2>&1
+# echo "make..."
+# make >> $log_file 2>&1
+# echo "make install..."
+# make install >> $log_file 2>&1
+# echo "==> done..."
+# 
+# echo -e "\n=> Reloading shell so rbenv is available..."
+# source $HOME/.bashrc
+# echo "==> done..."
+# echo -e "\n=> Making Ruby $ruby_version_string the global default"
+# rbenv rehash
+# rbenv global $ruby_version_string
 
-echo -e "\n=> Downloading Ruby $ruby_version_string \n"
-mkdir $rbenv_path && cd $rbenv_path && wget $ruby_source_url
+#thanks wayneeseguin :)
+echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
+curl -O -L -k http://rvm.beginrescueend.com/releases/rvm-install-head
+chmod +x rvm-install-head
+"$PWD/rvm-install-head" >> $log_file 2>&1
+[[ -f rvm-install-head ]] && rm -f rvm-install-head
+echo -e "\n=> Setting up RVM to load with new shells..."
+#if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
+echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bash_profile"
+echo "==> done..."
+echo "=> Loading RVM..."
+source ~/.bashrc
+source ~/.bash_profile
+source ~/.rvm/scripts/rvm
+echo "==> done..."
+echo -e "\n=> Installing Ruby $ruby_version_string (this will take a while)..."
+echo -e "=> More information about installing rubies can be found at http://rvm.beginrescueend.com/rubies/installing/ \n"
+rvm install $ruby_version >> $log_file 2>&1
 echo -e "\n==> done..."
-echo -e "\n=> Extracting Ruby $ruby_version_string"
-tar -xzf $ruby_source_tar_name >> $log_file 2>&1
+echo -e "\n=> Using 1.9.2 and setting it as default for new shells..."
+echo "=> More information about Rubies can be found at http://rvm.beginrescueend.com/rubies/default/"
+rvm --default use $ruby_version >> $log_file 2>&1
 echo "==> done..."
-echo -e "\n=> Installing Ruby $ruby_version_string"
-cd $ruby_source_dir_name
-echo "configure..."
-./configure --prefix=$HOME/.rbenv/versions/$ruby_version_string >> $log_file 2>&1
-echo "make..."
-make >> $log_file 2>&1
-echo "make install..."
-make install >> $log_file 2>&1
-echo "==> done..."
-
-echo -e "\n=> Reloading shell so rbenv is available..."
-source $HOME/.bashrc
-echo "==> done..."
-echo -e "\n=> Making Ruby $ruby_version_string the global default"
-rbenv rehash
-rbenv global $ruby_version_string
 
 echo -e "\n=> Reloading shell so ruby and rubygems are available..."
 source $HOME/.bashrc
