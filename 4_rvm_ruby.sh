@@ -20,10 +20,10 @@ echo "==> done..."
 
 #thanks wayneeseguin :)
 echo -e "\n=> Installing RVM the Ruby enVironment Manager http://rvm.beginrescueend.com/rvm/install/ \n"
-curl -O -L -k http://rvm.beginrescueend.com/releases/rvm-install-head
-chmod +x rvm-install-head
-"$PWD/rvm-install-head" >> $log_file 2>&1
-[[ -f rvm-install-head ]] && rm -f rvm-install-head
+curl -O -L -k https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer
+chmod +x rvm-installer
+"$PWD/rvm-installer" >> $log_file 2>&1
+[[ -f rvm-installer ]] && rm -f rvm-installer
 echo -e "\n=> Setting up RVM to load with new shells..."
 #if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
 echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bash_profile"
