@@ -75,12 +75,13 @@ echo "Installing sudo..."
 aptitude -y install sudo >> $log_file 2>&1
 echo "==> done."
 echo -e "Adding admin user $admin_user_name"
+groupadd admin
 useradd $admin_user_name -g admin --create-home
 echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
 
 echo -e "\n=> Installing OpenSSH server, if it isn't already installed..."
-apt-get install openssh-server >> $log_file 2>&1
+apt-get install -y openssh-server >> $log_file 2>&1
 echo "==> done."
 
 if [[ -d "$user_home/.ssh" ]] ; then
