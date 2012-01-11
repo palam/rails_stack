@@ -55,6 +55,12 @@ cd && mkdir -p railsready && touch install.log
 cd
 echo "==> done."
 
+echo "Updating package lists and packages"
+aptitude update >> $log_file 2>&1
+aptitude -y safe-upgrade >> $log_file 2>&1
+apt-get update
+echo "==> done."
+
 echo "Enter time zone (ex: UTC): "
 read time_zone
 echo "Enter admin username: "
@@ -124,9 +130,4 @@ echo -e '#!/bin/sh
     /sbin/iptables-restore < /etc/iptables.up.rules' > /etc/network/if-pre-up.d/iptables
 echo "Making new script executable"
 chmod +x /etc/network/if-pre-up.d/iptables
-echo "==> done."
-
-echo "Updating package lists and packages"
-aptitude update >> $log_file 2>&1
-aptitude -y safe-upgrade >> $log_file 2>&1
 echo "==> done."
