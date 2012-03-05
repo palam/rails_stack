@@ -27,6 +27,7 @@ chmod +x rvm-installer
 echo -e "\n=> Setting up RVM to load with new shells..."
 #if RVM is installed as user root it goes to /usr/local/rvm/ not ~/.rvm
 echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bash_profile"
+echo  '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # Load RVM into a shell session *as a function*' >> "$HOME/.bashrc"
 echo "==> done..."
 echo "=> Loading RVM..."
 source ~/.bashrc

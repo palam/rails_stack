@@ -80,9 +80,9 @@ echo "==> done."
 echo "Installing sudo..."
 aptitude -y install sudo >> $log_file 2>&1
 echo "==> done."
-echo -e "Adding admin user $admin_user_name"
-groupadd $admin_user_name 2>/dev/null
-[ $? -eq 0 ] && echo "Group already exists" || echo "Group added"
+# echo -e "Adding admin user $admin_user_name"
+# groupadd $admin_user_name 2>/dev/null
+# [ $? -eq 0 ] && echo "Group already exists" || echo "Group added"
 useradd $admin_user_name -g admin --create-home
 echo "${admin_user_name}:${admin_password}" | chpasswd
 echo "==> done."
